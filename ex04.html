@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentual de Representação do Faturamento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Percentual de Representação do Faturamento</h1>
+    <button onclick="calcularPercentuais()">Calcular</button>
+    <div id="resultado"></div>
+
+    <script>
+        const faturamentoPorEstado = {
+            'SP': 67836.43,
+            'RJ': 36678.66,
+            'MG': 29229.88,
+            'ES': 27165.48,
+            'Outros': 19849.53
+        };
+
+        function calcularPercentuais() {
+            const totalMensal = Object.values(faturamentoPorEstado).reduce((acc, cur) => acc + cur, 0);
+
+            const resultado = document.getElementById('resultado');
+            resultado.innerHTML = '';
+
+            for (const estado in faturamentoPorEstado) {
+                const percentual = (faturamentoPorEstado[estado] / totalMensal) * 100;
+                resultado.innerHTML += `<p>${estado}: ${percentual.toFixed(2)}%</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
